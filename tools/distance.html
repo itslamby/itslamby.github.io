@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Distance Calculator</title>
+	<link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #000000;
+            background-image: url('https://i.ibb.co/ZR23G6vH/35d796ac362070fe990eff8f9d22acb6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ffffffbf;
+            z-index: 1;
+        }
+        .title {
+            font-size: 40px;
+            margin-top: 22px;
+			margin-bottom: 11px;
+            text-align: center;
+            z-index: 2;
+        }
+        .boxes {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+        .boxes label {
+            margin: 4px 0;
+            z-index: 2;
+        }
+        .boxes input {
+            margin-bottom: 12px;
+            z-index: 2;
+        }
+        .text {
+            font-size: 16px;
+            margin-top: 0;
+            align-self: flex-start;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            text-align: left;
+            z-index: 2;
+        }
+		.btext {
+            font-size: 20px;
+            line-height: 1.5;
+            z-index: 2;
+        }
+		.btext1 {
+            font-size: 16px;
+            line-height: 1.5;
+            z-index: 2;
+			margin-top: 20px;
+        }
+        footer {
+            margin-top: auto;
+            font-size: 12px;
+            color: #0000007f;
+            padding-bottom: 20px;
+            text-align: right;
+            padding-right: 20px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="title">Coordinate Distance Calculator</div>
+
+    <div class="boxes">
+        <label><b>Latitude #1</b></label>
+        <input type="text" id="latitude1" maxlength="11" size="10">
+        
+        <label><b>Longitude #1</b></label>
+        <input type="text" id="longitude1" maxlength="11" size="10">
+        
+        <label><b>Latitude #2</b></label>
+        <input type="text" id="latitude2" maxlength="11" size="10">
+        
+        <label><b>Longitude #2</b></label>
+        <input type="text" id="longitude2" maxlength="11" size="10">
+        
+        <button id="calculateBtn">Submit!</button>
+		
+        <b class="btext1">- Distance -</b><br>
+        <div id="result" class="btext"></div>
+		
+    </div>
+	
+	<div class="text">
+        <b class="btext">ABOUT</b><br>
+        - This is a tool to find the distance between two coordinates in miles.<br>
+		- Completely ad-free and minimal compared to other websites!<br><br>
+		
+		<b class="btext">NOTES</b><br>
+        - I use this to get the accurate distance after I use FM-DX Maps. Very helpful for my (upcoming) logbook.<br>
+        </div>
+		
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function(event) {
+            const lat1 = parseFloat(document.getElementById('latitude1').value);
+            const lon1 = parseFloat(document.getElementById('longitude1').value);
+            const lat2 = parseFloat(document.getElementById('latitude2').value);
+            const lon2 = parseFloat(document.getElementById('longitude2').value);
+
+            if (isNaN(lat1) || isNaN(lon1) || isNaN(lat2) || isNaN(lon2)) {
+                document.getElementById('result').innerText = 'Make sure the coordinates are valid.';
+                return;
+            }
+
+            const R = 3958.8;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c;
+            
+            document.getElementById('result').innerText = `${distance.toFixed(2)} mi`;
+        });
+    </script>
+
+
+    <footer id="footer">
+        2025 itslamby
+    </footer>
+
+</body>
+</html>
+
