@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lamby's FM DXing Logbook!</title>
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #000000;
+            background: url('https://wallpaperaccess.com/full/104815.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffff7f;
+            z-index: 1;
+        }
+        .title {
+            font-size: 50px;
+            margin-top: 20px;
+            text-align: center;
+            z-index: 2;
+        }
+        .text {
+            font-size: 16px;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        .smalltext {
+            font-size: 12px;
+            color: #0000007f;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        .btext {
+            font-size: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            z-index: 2;
+        }
+        td {
+            padding: 2px 4px;
+        }
+        tr:first-child td {
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+        .call-sign { width: 60px; text-align: left; }
+        .frequency { width: 30px; text-align: right; }
+        .distance { width: 60px; text-align: right; }
+        .watts { width: 45px; text-align: right; }
+        .mode { width: 35px; text-align: center; }
+        .location { width: 150px; text-align: left; }
+        .date { width: 95px; text-align: center; }
+        .score { width: 35px; text-align: right; }
+        .notes { width: 200px; text-align: left; }
+        tr:nth-child(odd) { background-color: #dfdfdfaf; }
+        tr:nth-child(even) { background-color: #ffffffaf; }
+        footer {
+            margin-top: auto;
+            font-size: 12px;
+            color: #0000007f;
+            padding: 20px;
+            text-align: right;
+            z-index: 2;
+        }
+        .toggle-container {
+            text-align: center;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="title">lamby's FM DXing Logbook!</div>
+
+    <div class="text">
+        <b class="btext">NOTES</b><br>
+        You can sort by: <b>Call Sign</b>, <b>Frequency</b>, <b>Distance</b>, <b>Watts</b>, <b>Date Received</b>, or <b>Score</b> by clicking on the top of the table!<br><br>
+    </div>
+
+    <div class="toggle-container">
+        <label><input type="checkbox" id="showLocals"> Show Locals</label>
+    </div>
+    <div class="toggle-container">
+        <label><input type="checkbox" id="showDefunct"> Show Defunct</label>
+    </div>
+
+
+    <table border="1" id="logsTable">
+
+        <tr>
+            <td class="call-sign" onclick="sortTable('call-sign')">Call Sign</td>
+            <td class="frequency" onclick="sortTable('frequency')">Freq.</td>
+            <td class="distance" onclick="sortTable('distance')">Distance</td>
+            <td class="watts" onclick="sortTable('watts')">Watts</td>
+            <td class="mode">Mode</td>
+            <td class="location">Location</td>
+            <td class="date" onclick="sortTable('date')">Date Received</td>
+            <td class="score" onclick="sortTable('score')">Score</td>
+            <td class="notes">Notes</td>
+        </tr>
+    </table>
+
+
+<!-- USE THIS TEMPLATE FOR ANY NEW ENTRIES
+
+
+        <tr>
+            <td class="call-sign"> </td>
+            <td class="frequency"> </td>
+            <td class="distance"> </td>
+            <td class="watts"> </td>
+            <td class="mode"> </td>
+            <td class="location"> </td>
+            <td class="date"> </td>
+            <td class="score"> </td>
+            <td class="notes"> </td>
+        </tr>
+
+
+-->
+
+
+    <div class="text">
+        <b>Stations:</b> <span id="stationsCount">0</span>
+    </div>
+    <div class="smalltext">
+        <b>Locals:</b> <span id="localsCount">0</span><br>
+        <b>Defunct:</b> <span id="defunctCount">0</span><br>
+        <b>Total:</b> <span id="totalCount">0</span>
+    </div>
+
+	<footer id="footer"></footer>
+
+	<script>
+	  fetch('/src/footer.html')
+		.then(res => res.text())
+		.then(html => {
+		  document.getElementById('footer').innerHTML = html;
+		})
+		.catch(err => console.error('Failed to load footer:', err));
+	</script>
+
+    <script>
+        let isAscendingDate = false,
+            isAscendingCallSign = true,
+            isAscendingFrequency = true,
+            isAscendingDistance = false,
+            isAscendingWatts = false,
+            isAscendingScore = false;
+
+        function updateRowColors() {
+            const rows = [...document.querySelectorAll('#logsTable tr')]
+                .slice(1)
+                .filter(r => r.style.display !== 'none');
+
+            rows.forEach((r, i) => {
+                r.style.backgroundColor = i % 2 ? '#dfdfdfaf' : '#ffffffaf';
+            });
+        }
+
+		function updateCounts() {
+			const rows = [...document.querySelectorAll('#logsTable tr')].slice(1);
+			let locals = 0,
+				defunct = 0,
+				total = rows.length,
+				stations = 0;
+
+			rows.forEach(r => {
+				// Count non-defunct locals separately
+				if (r.classList.contains('local') && !r.classList.contains('defunct')) locals++;
+
+				if (r.classList.contains('defunct')) defunct++;
+				if (!r.classList.contains('local') && !r.classList.contains('defunct')) stations++;
+			});
+
+			document.getElementById('localsCount').innerText = locals;
+			document.getElementById('defunctCount').innerText = defunct;
+			document.getElementById('stationsCount').innerText = stations;
+			document.getElementById('totalCount').innerText = total;
+		}
+
+        function sortTable(column) {
+            const table = document.getElementById("logsTable");
+            const rows = [...table.rows].slice(1);
+            let ascending;
+
+            switch (column) {
+                case 'date':
+                    ascending = isAscendingDate;
+                    isAscendingDate = !isAscendingDate;
+                    break;
+                case 'call-sign':
+                    ascending = isAscendingCallSign;
+                    isAscendingCallSign = !isAscendingCallSign;
+                    break;
+                case 'frequency':
+                    ascending = isAscendingFrequency;
+                    isAscendingFrequency = !isAscendingFrequency;
+                    break;
+                case 'distance':
+                    ascending = isAscendingDistance;
+                    isAscendingDistance = !isAscendingDistance;
+                    break;
+                case 'watts':
+                    ascending = isAscendingWatts;
+                    isAscendingWatts = !isAscendingWatts;
+                    break;
+                case 'score':
+                    ascending = isAscendingScore;
+                    isAscendingScore = !isAscendingScore;
+                    break;
+            }
+
+            rows.sort((a, b) => {
+                let av, bv;
+
+                if (column === 'date') {
+                    av = new Date(a.cells[6].innerText);
+                    bv = new Date(b.cells[6].innerText);
+                } else if (column === 'frequency') {
+                    av = parseFloat(a.cells[1].innerText);
+                    bv = parseFloat(b.cells[1].innerText);
+                } else if (column === 'distance') {
+                    av = parseFloat(a.cells[2].innerText);
+                    bv = parseFloat(b.cells[2].innerText);
+                } else if (column === 'watts') {
+                    av = parseFloat(a.cells[3].innerText.replace(/,/g, ''));
+                    bv = parseFloat(b.cells[3].innerText.replace(/,/g, ''));
+                } else if (column === 'score') {
+                    av = parseInt(a.cells[7].innerText);
+                    bv = parseInt(b.cells[7].innerText);
+                } else {
+                    av = a.cells[0].innerText.toLowerCase();
+                    bv = b.cells[0].innerText.toLowerCase();
+                }
+
+                if (av < bv) return ascending ? -1 : 1;
+                if (av > bv) return ascending ? 1 : -1;
+                return a.cells[0].innerText.localeCompare(b.cells[0].innerText);
+            });
+
+            rows.forEach(r => table.appendChild(r));
+            updateRowColors();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const showLocals = document.getElementById('showLocals');
+            const showDefunct = document.getElementById('showDefunct');
+            const rows = document.querySelectorAll('#logsTable tr');
+
+            showLocals.checked = false;
+            showDefunct.checked = false;
+
+            rows.forEach(r => {
+                const notes = r.querySelector('.notes');
+                const mode = r.querySelector('.mode');
+
+                if (notes && notes.innerText.toUpperCase().includes('DEFUNCT')) {
+                    r.classList.add('defunct');
+                }
+
+                if (mode && mode.innerText.trim().toLowerCase() === 'local') {
+                    r.classList.add('local');
+                }
+            });
+
+            function updateVisibility() {
+                rows.forEach(r => {
+                    const isLocal = r.classList.contains('local');
+                    const isDefunct = r.classList.contains('defunct');
+
+                    if (isDefunct && !showDefunct.checked) {
+                        r.style.display = 'none';
+                    } else if (isLocal && !showLocals.checked && !isDefunct) {
+                        r.style.display = 'none';
+                    } else {
+                        r.style.display = 'table-row';
+                    }
+                });
+
+                updateRowColors();
+            }
+
+            showLocals.onchange = updateVisibility;
+            showDefunct.onchange = updateVisibility;
+
+            sortTable('date');
+            updateVisibility();
+            updateCounts();
+        });
+    </script>
+</body>
+</html>
