@@ -147,12 +147,12 @@
 <footer id="footer"></footer>
 
 <script>
-  fetch('/src/footer.txt')
-    .then(response => response.text())
-    .then(text => {
-      document.getElementById('footer').innerHTML = text;
+  fetch('/src/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
     })
-    .catch(err => console.error('Footer failed to load:', err));
+    .catch(err => console.error('Failed to load footer:', err));
 </script>
 
 </body>
