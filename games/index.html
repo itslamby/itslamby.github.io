@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lamby's Games</title>
+    <link href="https://fonts.cdnfonts.com/css/roboto-condensed" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://i.ibb.co/kVz72wZx/73aff40029929bc353be490de3d9130a.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-bottom: 50px;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffffbf;
+            z-index: 1;
+        }
+        .title {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 50px;
+            margin-top: 25px;
+            text-align: center;
+            z-index: 2;
+        }
+        .image-container {
+	     	margin: 50px auto 0 auto;
+			display: grid;
+            grid-template-columns: repeat(auto-fit, 140px);
+			gap: 40px;
+			justify-content: center;
+			justify-items: center;
+			width: 100%;
+			max-width: 1040px;
+			padding: 0 20px;
+			box-sizing: border-box;
+			z-index: 2;
+        }
+        .image-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-container img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .no-underline {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-align: center;
+        }
+        footer {
+            font-size: 12px;
+            color: #0000007f;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 20px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="title">Games</div>
+
+    <div class="image-container">
+        <div>
+            <a href="https://itslamby.github.io/games/increlevels">
+                <img src="https://i.ibb.co/DDppbp1L/increlevels.png">
+            </a>
+            <a href="https://itslamby.github.io/games/increlevels" class="no-underline">IncreLevels</a>
+        </div>
+    </div>
+	
+<footer id="footer"></footer>
+
+<script>
+  fetch('/src/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+    })
+    .catch(err => console.error('Failed to load footer:', err));
+</script>
+
+</body>
+</html>
