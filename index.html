@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome!</title>
     <link href="https://fonts.cdnfonts.com/css/roboto-condensed" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -18,9 +18,9 @@
             color: #000000;
             background-image: url('https://i.ibb.co/3Y1s9Y8q/5660d0ed05e6f747e85494627519fc54.jpg');
             background-size: cover;
-			background-position: center;
+            background-position: center;
             background-attachment: fixed;
-            min-height: 100vh; 
+            justify-content: flex-start;
         }
         .overlay {
             position: fixed;
@@ -32,15 +32,14 @@
             z-index: 1;
         }
         .title {
-            font-family: 'Roboto Condensed', sans-serif;
+		    font-family: 'Roboto Condensed', sans-serif;
             font-size: 50px;
             margin-top: 25px;
             z-index: 2;
         }
         .text {
-            font-family: 'Roboto', sans-serif;
             font-size: 16px;
-            margin-top: 50px;
+            margin-top: 25px;
             width: 100%;
             padding: 0 20px;
             text-align: center;
@@ -58,6 +57,47 @@
             padding: 20px;
             z-index: 2;
         }
+        .image-container {
+            margin-top: 75px; 
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 2;
+        }
+        .image-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 25px;
+        }
+        .image-container img {
+            width: 125px;
+            height: 125px;
+            cursor: pointer;
+        }
+        .no-underline {
+            font-size: 32px;
+            font-weight: 600;
+            text-decoration: none;
+            font-family: 'Roboto Condensed', sans-serif;
+            display: block;
+            text-align: center;			
+		}
+		.text2 {
+		    font-weight: 600;
+            text-decoration: none;
+            font-family: 'Roboto Condensed', sans-serif;
+            display: block;
+            text-align: center;
+			margin-top: 100px;
+            margin-bottom: 50px;
+			z-index: 2;
+		}
+            a:link {
+            color: #051;
+            background-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -69,11 +109,51 @@
     </div>
     
     <div class="text">
-        Hello! This website is under construction. Check back later! ^^
+        Hello there!<br><br>
+        You are viewing my personal website which offers some pretty cool stuff I've made in my free time.
     </div>
 
-    <footer id="footer">
-        2025 itslamby
-    </footer>
+    <div class="image-container">
+        <div>
+            <a href="about:blank">
+                <img src="https://img.theepochtimes.com/assets/uploads/2022/09/06/ET-BoPeep-Valais-Blacknose-2.jpeg">
+            </a>
+            <a href="about:blank" class="no-underline">Placeholder</a>
+        </div>
+        <div>
+            <a href="about:blank">
+                <img src="https://img.theepochtimes.com/assets/uploads/2022/09/06/ET-BoPeep-Valais-Blacknose-2.jpeg">
+            </a>
+            <a href="about:blank" class="no-underline">Games</a>
+        </div>
+        <div>
+            <a href="about:blank">
+                <img src="https://i.pinimg.com/236x/88/d5/67/88d567a415b9644dd4424db42479a219--hobby-farms-baby-lamb.jpg">
+            </a>
+            <a href="habout:blank" class="no-underline">Placeholder</a>
+        </div>
+        <div>
+            <a href="about:blank">
+                <img src="https://images.stockcake.com/public/4/5/f/45fbc909-1a2a-4b1d-b0e5-d63d79624e05_large/sleeping-baby-lamb-stockcake.jpg">
+            </a>
+            <a href="about:blank" class="no-underline">Placeholder</a>
+        </div>
+    </div>
+	
+	    <div class="text2">
+	      <a href="about:blank">Placeholder</a> | <a href="about:blank">Placeholder</a>
+    </div>
+
+<footer id="footer"></footer>
+
+<script>
+  fetch('/src/footer.txt')
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById('footer').innerHTML = text;
+    })
+    .catch(err => console.error('Footer failed to load:', err));
+</script>
+
 </body>
 </html>
