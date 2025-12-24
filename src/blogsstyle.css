@@ -81,7 +81,7 @@ footer {
 .image-row {
 	height: 320px;
 	max-height: 18vw;
-	min-height: 6vw;
+	min-height: 10vw;
 	height: auto;
 	display: inline-block;
 	margin: 50px 10px;
