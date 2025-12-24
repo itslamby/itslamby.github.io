@@ -79,9 +79,8 @@ footer {
 	z-index: 2;
 }
 .image-row {
-	height: 320px;
-	max-height: 18vw;
-	min-height: 10vw;
+	height: 480px;
+	max-height: 24vw;
 	height: auto;
 	display: inline-block;
 	margin: 50px 10px;
