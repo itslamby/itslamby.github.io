@@ -5,7 +5,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	color: #000000;
-	background-image: url('https://cdn12.picryl.com/photo/2016/12/31/snow-cold-snowflakes-backgrounds-textures-bffe60-1024.jpg');
+	background-image: url('/src/blogsbg.jpg');
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
