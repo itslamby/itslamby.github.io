@@ -80,13 +80,20 @@ footer {
     </div>
     
     <div class="text">
-        <a class="general" href="https://itslamby.github.io/utils/distance"> Coordinate Distance Calculator </a>
+            <a class="general" href="https://itslamby.github.io/utils/distance"> Coordinate Distance Calculator </a>
 	    	<a class="general" href="https://itslamby.github.io/utils/fmdx"> FM-DX Maps Lookup </a>
     </div>
     
-    <footer id="footer">
-        2025 itslamby
-    </footer>
+<footer id="footer"></footer>
+
+<script>
+  fetch('/src/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+    })
+    .catch(err => console.error('Failed to load footer:', err));
+</script>
 
 </body>
 </html>
