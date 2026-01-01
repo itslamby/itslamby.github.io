@@ -137,15 +137,9 @@
         };
     </script>
 
-<script>
-  fetch('/src/footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-    })
-    .catch(err => console.error('Failed to load footer:', err));
-</script>
+    <footer id="footer">
+        2026 itslamby
+    </footer>
 
 </body>
 </html>
-
