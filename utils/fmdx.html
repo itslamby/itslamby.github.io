@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM-DX Maps Lookup</title>
+	<link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #000000;
+            background-image: url('https://i.ibb.co/V0GpmQ5R/97a2eafd98a87ae3db0a39d4a4ca28d6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ffffffbf;
+            z-index: 1;
+        }
+        .title {
+            font-size: 50px;
+            margin-top: 20px;
+            text-align: center;
+            z-index: 2;
+        }
+        .boxes {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .boxes label {
+            margin: 4px 0;
+            z-index: 2;
+        }
+        .boxes input {
+            margin-bottom: 12px;
+            z-index: 2;
+        }
+        .text {
+            font-size: 16px;
+            margin-top: 0;
+            align-self: flex-start;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            text-align: left;
+            z-index: 2;
+        }
+        .btext {
+            font-size: 20px;
+            line-height: 1.5;
+            z-index: 2;
+        }
+        footer {
+            margin-top: auto;
+            font-size: 12px;
+            color: #0000007f;
+            padding-bottom: 20px;
+            text-align: right;
+            padding-right: 20px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="title">FM-DX Maps Lookup</div>
+
+    <div class="boxes">
+        <label><b>Latitude</b></label>
+        <input type="text" id="latitude" maxlength="11" size="10">
+
+        <label><b>Longitude</b></label>
+        <input type="text" id="longitude" maxlength="11" size="10">
+
+        <label><b>Frequency</b></label>
+        <input type="text" id="frequency" maxlength="6" size="8">
+
+        <label><b>PI Code</b></label>
+        <input type="text" id="picode" maxlength="4" size="8">
+
+        <button onclick="goToLink()">Submit!</button>
+    </div>
+
+    <div class="text">
+        <b class="btext">ABOUT</b><br>
+        - This is a tool to find a radio station via PI Code. It makes narrowing down a radio station very simple and fast.<br>
+        - Clicking "Submit!" will open up a new tab to the FM-DX Maps website with the set parameters.<br><br>
+
+        <b class="btext">NOTES</b><br>
+        - If a station does not come up, it may mean the PI is invalid or a chance the database has not been updated.<br>
+        - You can leave the Latitude and Longitude fields blank if you only want to look up a valid station.<br>
+        - Furthermore, you can set your location through the FM-DX Maps site to skip the step of entering your Latitude and Longitude.<br>
+        - Always make sure to do your research if you are ever uncertain.<br>
+    </div>
+
+    <script>
+        function goToLink() {
+            const latitude = document.getElementById('latitude').value;
+            const longitude = document.getElementById('longitude').value;
+            const frequency = document.getElementById('frequency').value;
+            const picode = document.getElementById('picode').value;
+
+            let link = 'https://maps.fmdx.org/#';
+
+            if (latitude || longitude) {
+                link += `qth=${latitude},${longitude}`;
+            }
+            if (frequency) {
+                link += `&freq=${frequency}`;
+            }
+            if (picode) {
+                link += `&findPi=${picode}`;
+            }
+
+            window.open(link, '_blank');
+        }
+
+        window.onload = function() {
+            document.getElementById('latitude').value = '';
+            document.getElementById('longitude').value = '';
+        };
+    </script>
+
+<script>
+  fetch('/src/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+    })
+    .catch(err => console.error('Failed to load footer:', err));
+</script>
+
+</body>
+</html>
+
