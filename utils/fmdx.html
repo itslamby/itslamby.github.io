@@ -109,6 +109,8 @@
         - Always make sure to do your research if you are ever uncertain.<br>
     </div>
 
+    <footer id="footer"></footer>
+	
     <script>
         function goToLink() {
             const latitude = document.getElementById('latitude').value;
@@ -137,9 +139,14 @@
         };
     </script>
 
-    <footer id="footer">
-        2026 itslamby
-    </footer>
+    <script>
+      fetch('/src/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer').innerHTML = html;
+        })
+        .catch(err => console.error('Failed to load footer:', err));
+    </script>
 
 </body>
 </html>
