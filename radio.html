@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio</title>
+	<link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #000000;
+            background-image: url('/src/radiobg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            justify-content: flex-start;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ffffff7f;
+            z-index: 1;
+        }
+        .title {
+		        font-family: 'Roboto', sans-serif;
+            font-size: 50px;
+            margin-top: 25px;
+            z-index: 2;
+        }
+        .text {
+            font-size: 16px;
+            margin-top: 25px;
+            width: 100%;
+            padding: 0 20px;
+            text-align: center;
+            box-sizing: border-box;
+            z-index: 2;
+            overflow-wrap: break-word;
+        }
+        footer {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: #0000007f;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 20px;
+            z-index: 2;
+        }
+        .image-container {
+            margin-top: 75px; 
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 2;
+        }
+        .image-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 25px;
+        }
+        .image-container img {
+            width: 125px;
+            height: 125px;
+            cursor: pointer;
+        }
+            a:link {
+            color: #000;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+    
+    <div class="title">
+        Radio
+    </div>
+    
+    <div class="text">
+        this is a work in progress. check back later...<br><br><br>
+    </div>
+<div class="header" style="text-align: center; margin: 0 auto;">
+  <a href="https://itslamby.github.io/games/increlevels" 
+     style="text-decoration: underline; font-size: 30px; font-weight: bold; color: inherit;">
+    FM DXing Logbook<br><br><br>
+  </a>
+</div>
+
+<footer id="footer"></footer>
+  
+<script>
+  fetch('/src/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+    })
+    .catch(err => console.error('Failed to load footer:', err));
+</script>
+
+</body>
+</html>
