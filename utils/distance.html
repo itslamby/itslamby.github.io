@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coordinate Distance Calculator</title>
-	<link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -31,7 +31,7 @@
         .title {
             font-size: 40px;
             margin-top: 22px;
-			margin-bottom: 11px;
+            margin-bottom: 11px;
             text-align: center;
             z-index: 2;
         }
@@ -61,16 +61,16 @@
             text-align: left;
             z-index: 2;
         }
-		.btext {
+        .btext {
             font-size: 20px;
             line-height: 1.5;
             z-index: 2;
         }
-		.btext1 {
+        .btext1 {
             font-size: 16px;
             line-height: 1.5;
             z-index: 2;
-			margin-top: 20px;
+            margin-top: 20px;
         }
         footer {
             margin-top: auto;
@@ -103,21 +103,22 @@
         <input type="text" id="longitude2" maxlength="11" size="10">
         
         <button id="calculateBtn">Submit!</button>
-		
+        
         <b class="btext1">- Distance -</b><br>
         <div id="result" class="btext"></div>
-		
     </div>
-	
-	<div class="text">
+    
+    <div class="text">
         <b class="btext">ABOUT</b><br>
         - This is a tool to find the distance between two coordinates in miles.<br>
-	    	- Completely ad-free and minimal compared to other websites!<br><br>
-		
-    		<b class="btext">NOTES</b><br>
+        - Completely ad-free and minimal compared to other websites!<br><br>
+        
+        <b class="btext">NOTES</b><br>
         - I use this to get the accurate distance after I use FM-DX Maps. Very helpful for my (upcoming) logbook.<br>
-        </div>
-		
+    </div>
+    
+    <footer id="footer"></footer>
+
     <script>
         document.getElementById('calculateBtn').addEventListener('click', function(event) {
             const lat1 = parseFloat(document.getElementById('latitude1').value);
@@ -134,7 +135,7 @@
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
             const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180 * Math.PI / 180) *
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
                       Math.sin(dLon / 2) * Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             const distance = R * c;
@@ -143,15 +144,14 @@
         });
     </script>
 
-<script>
-  fetch('/src/footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-    })
-    .catch(err => console.error('Failed to load footer:', err));
-</script>
+    <script>
+      fetch('/src/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer').innerHTML = html;
+        })
+        .catch(err => console.error('Failed to load footer:', err));
+    </script>
 
 </body>
 </html>
-
