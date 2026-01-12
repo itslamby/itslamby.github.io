@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lamby's private page</title>
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            text-decoration: none;
+            color: #000;
+        }
+        .letter {
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+        }
+        .text {
+            font-size: 16px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="title" style="text-align:center;">OCs</div><br>
+	<div class="letter">S</div>
+    <a href="https://itslamby.github.io/priv/ocs/snowee" class="text">Snowee</a><br>
+</body>
+</html>
