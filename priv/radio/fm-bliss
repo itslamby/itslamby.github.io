@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Radio - Bliss Fields</title>
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+        }
+        .h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #0000007f;
+            text-align: center;
+        }
+        table {
+            margin: 50px auto;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            font-size: 13px;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 0 5px;
+        }
+        th {
+            font-weight: 900;
+            background: #e0e0e0;
+            text-align: center;
+        }
+        th:nth-child(1), td:nth-child(1) { width: 125px; }
+        th:nth-child(2), td:nth-child(2) { width: 65px; }
+        th:nth-child(3), td:nth-child(3) { width: 100px; }
+		th:nth-child(4), td:nth-child(4) { width: 130px; }
+        th:nth-child(5), td:nth-child(5) { width: 140px; }
+		th:nth-child(6), td:nth-child(6) { width: 50px; }
+        th:nth-child(7), td:nth-child(7) { width: 125px; }
+        td:nth-child(1) { text-align: left; }
+        td:nth-child(2) { text-align: right; }
+        td:nth-child(3) { text-align: center; }
+        td:nth-child(4) { text-align: center; }
+        td:nth-child(5) { text-align: center; }
+        td:nth-child(6) { text-align: right; }
+        td:nth-child(7) { text-align: center; }
+        tr:nth-child(even) td {
+            background: #ffffff;
+        }
+        tr:nth-child(odd) td {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">FM Radio</div>
+    <div class="h1">Bliss Fields</div>
+    <table>
+        <tr>
+            <th>Call Sign</th>
+            <th>Frequency</th>
+            <th>Signal Strength</th>
+            <th>Format</th>
+            <th>Branding</th>
+            <th>Watts</th>
+            <th>Location</th>
+        </tr>
+        <tr>
+            <td>W06CE</td>
+            <td>87.7 MHz</td>
+            <td>Strong</td>
+            <td>Canadian French</td>
+			<td>PlusTV 6</td>
+            <td>1,000</td>
+			<td>(Outside of Area)</td>
+        </tr>
+        <tr>
+            <td>WBRG-LP</td>
+            <td>88.1 MHz</td>
+            <td>Strong</td>
+            <td>Travelers' Information</td>
+			<td>540AM WFES734</td>
+            <td>100</td>
+			<td>Construction Site</td>
+        </tr>
+        <tr>
+            <td>WWAJ</td>
+            <td>91.7 MHz</td>
+            <td>Very Strong</td>
+            <td>Classical</td>
+			<td>Waves 91.7</td>
+            <td>1,800</td>
+			<td>Utopia Beach</td>
+        </tr>
+        <tr>
+            <td>W226CM (WBYD328)</td>
+            <td>93.1 MHz</td>
+            <td>Very Strong</td>
+            <td>Weather</td>
+			<td>WHB63 Weather Radio</td>
+            <td>250</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WSRB</td>
+            <td>94.9 MHz</td>
+            <td>Very Strong</td>
+            <td>Vaporwave</td>
+			<td>sorbet 94.9</td>
+            <td>20,000</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>W240BE (WPIB-HD2)</td>
+            <td>95.9 MHz</td>
+            <td>Very Strong</td>
+            <td>R&B</td>
+			<td>95.9 The Quiet Storm</td>
+            <td>250</td>
+			<td>Pibb Beach</td>
+        </tr>
+        <tr>
+            <td>W251CI (WBFS-AM)</td>
+            <td>98.1 MHz</td>
+            <td>Very Strong</td>
+            <td>Nostalgia</td>
+			<td>The Bliss</td>
+            <td>120</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WCOL</td>
+            <td>98.9 MHz</td>
+            <td>Strong</td>
+            <td>Soft AC</td>
+			<td>Cool 98.9</td>
+            <td>5,800</td>
+			<td>Iskaldfred</td>
+        </tr>
+        <tr>
+            <td>WDIJ</td>
+            <td>99.5 MHz</td>
+            <td>Very Strong</td>
+            <td>Flip-Side Music</td>
+			<td>99.5 The Arcane</td>
+            <td>12,000</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WBJS-LP</td>
+            <td>100.7 MHz</td>
+            <td>Moderate</td>
+            <td>Video Game Music</td>
+			<td>Joystick 100.7</td>
+            <td>100</td>
+			<td>Iskaldfred</td>
+        </tr>
+        <tr>
+            <td>WCEL</td>
+            <td>101.1 MHz</td>
+            <td>Very Strong</td>
+            <td>Winter Jazz</td>
+			<td>Celeste 101.1</td>
+            <td>99</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WPIB</td>
+            <td>101.9 MHz</td>
+            <td>Very Strong</td>
+            <td>Top-40</td>
+			<td>P!BB 102</td>
+            <td>100,000</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WSEG</td>
+            <td>102.5 MHz</td>
+            <td>Very Strong</td>
+            <td>Rock</td>
+			<td>SEGway 102.5</td>
+            <td>1,500</td>
+			<td>Bliss Fields</td>
+        </tr>
+        <tr>
+            <td>WKFF</td>
+            <td>103.3 MHz</td>
+            <td>Strong</td>
+            <td>Hot AC</td>
+			<td>koffee 103.3</td>
+            <td>6,000</td>
+			<td>Coffee Shop</td>
+        </tr>
+        <tr>
+            <td>W300BX (WPIB-HD3)</td>
+            <td>103.9 MHz</td>
+            <td>Strong</td>
+            <td>LGBTQ+</td>
+			<td>PRIDE RADIO</td>
+            <td>95,000</td>
+			<td>(Outside of Area)</td>
+        </tr>
+        <tr>
+            <td>WNYL</td>
+            <td>107.1 MHz</td>
+            <td>Strong</td>
+            <td>Classic Hits</td>
+			<td>107.1 The Vinyl</td>
+            <td>15,000</td>
+			<td>(Outside of Area)</td>
+        </tr>
+        <tr>
+            <td>WKTS</td>
+            <td>107.5 MHz</td>
+            <td>Very Strong</td>
+            <td>Top-40</td>
+			<td>107.5 KISS FM</td>
+            <td>92,000</td>
+			<td>(Outside of Area)</td>
+        </tr>
+        <tr>
+            <td>W300BX (WPIB-HD3)</td>
+            <td>107.9 MHz</td>
+            <td>Very Strong</td>
+            <td>Ambient</td>
+			<td>Ethereal Bay 107.9</td>
+            <td>250</td>
+			<td>Bliss Fields</td>
+        </tr>
+    </table>
+</body>
+</html>
